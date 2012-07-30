@@ -15,7 +15,7 @@ public final class FeatureActiveStateChangedEvent extends FeatureManagerEvent {
 
     private final boolean active;
 
-    public FeatureActiveStateChangedEvent(FeatureManager manager, Feature feature, boolean active) {
+    public FeatureActiveStateChangedEvent(final FeatureManager manager, final Feature feature, final boolean active) {
         super(manager, feature);
         this.active = active;
     }

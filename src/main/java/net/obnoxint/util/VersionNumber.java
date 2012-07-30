@@ -29,7 +29,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
 
     private static final long serialVersionUID = 9142373700216765155L;
 
-    public static VersionNumber fromString(String string) {
+    public static VersionNumber fromString(final String string) {
         if (string != null) {
             int maj, min, rev, bld;
             String mu = "";
@@ -52,7 +52,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
                         }
                     }
                     return new VersionNumber(maj, min, rev, bld, mu);
-                } catch (NumberFormatException e) {}
+                } catch (final NumberFormatException e) {}
             }
         }
         return null;
@@ -65,14 +65,14 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
      * @param sep the separator.
      * @return a new instance of VersionNumber or null if no guessing was possible.
      */
-    public static VersionNumber guessVersion(String v, String sep) {
+    public static VersionNumber guessVersion(final String v, String sep) {
         if (v != null && !v.trim().isEmpty()) {
             if (sep == null || sep.isEmpty()) {
                 sep = VERSION_SEGMENT_SEPARATOR;
             }
 
-            String[] s = v.split(sep);
-            int l = s.length;
+            final String[] s = v.split(sep);
+            final int l = s.length;
 
             if (l > 0) {
 
@@ -86,7 +86,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
                     try {
                         maj = Integer.parseInt(s[0]);
                         return new VersionNumber(maj, min, rev, bld, mu);
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         return new VersionNumber(maj, min, rev, bld, s[0]);
                     }
                 } else if (l == 2) {
@@ -94,7 +94,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
                         maj = Integer.parseInt(s[0]);
                         min = Integer.parseInt(s[1]);
                         return new VersionNumber(maj, min, rev, bld, mu);
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         if (maj == -1) {
                             return new VersionNumber(maj, min, rev, bld, s[0] + sep + s[1]);
                         }
@@ -109,7 +109,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
                         min = Integer.parseInt(s[1]);
                         rev = Integer.parseInt(s[2]);
                         return new VersionNumber(maj, min, rev, bld, mu);
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         if (maj == -1) {
                             return new VersionNumber(maj, min, rev, bld, s[0] + sep + s[1] + sep + s[2]);
                         }
@@ -128,7 +128,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
                         rev = Integer.parseInt(s[2]);
                         bld = Integer.parseInt(s[3]);
                         return new VersionNumber(maj, min, rev, bld, mu);
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         if (maj == -1) {
                             return new VersionNumber(maj, min, rev, bld, s[0] + sep + s[1] + sep + s[2] + sep + s[3]);
                         }
@@ -151,7 +151,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
                         bld = Integer.parseInt(s[3]);
                         mu = s[4];
                         return new VersionNumber(maj, min, rev, bld, mu);
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         if (maj == -1) {
                             return new VersionNumber(maj, min, rev, bld, s[0] + sep + s[1] + sep + s[2] + sep + s[3] + sep + s[4]);
                         }
@@ -178,7 +178,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
     private final int build;
     private final String markup;
 
-    public VersionNumber(int major, int minor, int revision, int build, String markup) {
+    public VersionNumber(final int major, final int minor, final int revision, final int build, final String markup) {
         this.major = (major < 0) ? 0 : major;
         this.minor = (minor < 0) ? 0 : minor;
         this.revision = (revision < 0) ? 0 : revision;
@@ -186,7 +186,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
         this.markup = (markup == null || markup.trim().isEmpty()) ? "" : markup.trim();
     }
 
-    public VersionNumber(VersionNumber v) {
+    public VersionNumber(final VersionNumber v) {
         this(v.major, v.minor, v.revision, v.build, v.markup);
     }
 
@@ -223,10 +223,10 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj != null) {
             if (obj instanceof VersionNumber) {
-                VersionNumber o = (VersionNumber) obj;
+                final VersionNumber o = (VersionNumber) obj;
                 return o.major == major && o.minor == minor && o.revision == revision && o.build == build && o.markup == markup;
             } else if (obj instanceof String) {
                 return equals(fromString((String) obj));
@@ -235,7 +235,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
         return false;
     }
 
-    public boolean equalsIgnoreMarkup(VersionNumber obj) {
+    public boolean equalsIgnoreMarkup(final VersionNumber obj) {
         if (obj != null) {
             return obj.major == major && obj.minor == minor && obj.revision == revision && obj.build == build;
         }
@@ -264,7 +264,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder().append(major).append(VERSION_SEGMENT_SEPARATOR).append(minor).append(VERSION_SEGMENT_SEPARATOR).append(revision).append(VERSION_SEGMENT_SEPARATOR).append(build);
+        final StringBuilder sb = new StringBuilder().append(major).append(VERSION_SEGMENT_SEPARATOR).append(minor).append(VERSION_SEGMENT_SEPARATOR).append(revision).append(VERSION_SEGMENT_SEPARATOR).append(build);
         if (!markup.isEmpty()) {
             sb.append(MARKUP_SEGMENT_SEPARATOR).append(markup);
         }

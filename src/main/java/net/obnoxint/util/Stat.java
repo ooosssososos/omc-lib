@@ -10,19 +10,19 @@ public abstract class Stat implements Serializable {
 
         private static final long serialVersionUID = -3702196029599532933L;
 
-        public SimpleStat(Stat stat) {
+        public SimpleStat(final Stat stat) {
             super(stat);
         }
 
-        public SimpleStat(String id) {
+        public SimpleStat(final String id) {
             super(id);
         }
 
-        public SimpleStat(String id, float percentage) {
+        public SimpleStat(final String id, final float percentage) {
             super(id, percentage);
         }
 
-        public SimpleStat(String id, long balance) {
+        public SimpleStat(final String id, final long balance) {
             super(id, balance);
         }
 
@@ -36,7 +36,7 @@ public abstract class Stat implements Serializable {
 
     private static final long serialVersionUID = 280113680395112996L;
 
-    protected static long getPercentageLong(float percentage) {
+    protected static long getPercentageLong(final float percentage) {
         return (long) ((Long.MAX_VALUE / 100f) * ((percentage > 100f) ? 100f : ((percentage < 0f) ? 0f : percentage)));
     }
 
@@ -72,7 +72,7 @@ public abstract class Stat implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj instanceof Stat) {
             return ((Stat) obj).id.equals(id);
         } else if (obj instanceof String) {
@@ -130,9 +130,9 @@ public abstract class Stat implements Serializable {
     }
 
     public void setBalance(final long balance) {
-        long previousBalance = this.balance;
+        final long previousBalance = this.balance;
         this.balance = balance;
-        for (StatListener l : getListeners()) {
+        for (final StatListener l : getListeners()) {
             l.onBalanceChanged(this, previousBalance);
         }
     }

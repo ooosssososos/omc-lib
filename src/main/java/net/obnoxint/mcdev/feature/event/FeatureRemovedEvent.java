@@ -13,7 +13,7 @@ public final class FeatureRemovedEvent extends FeatureManagerEvent {
         return handlerList;
     }
 
-    public FeatureRemovedEvent(FeatureManager manager, Feature feature) {
+    public FeatureRemovedEvent(final FeatureManager manager, final Feature feature) {
         super(manager, feature);
     }
 

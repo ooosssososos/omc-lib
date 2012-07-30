@@ -27,13 +27,13 @@ public abstract class FeatureProperties {
 
     private final Feature feature;
 
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     private File propertiesDirectory = null;
 
     private File propertiesFile = null;
 
-    public FeatureProperties(Feature feature) {
+    public FeatureProperties(final Feature feature) {
         this.feature = feature;
     }
 
@@ -51,12 +51,12 @@ public abstract class FeatureProperties {
     public final void loadProperties() {
         try {
             onLoad();
-            FileInputStream fis = new FileInputStream(getPropertiesFile());
+            final FileInputStream fis = new FileInputStream(getPropertiesFile());
             getProperties().load(fis);
             fis.close();
             onLoaded();
             Bukkit.getPluginManager().callEvent(new FeaturePropertiesLoadedEvent(feature));
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -65,14 +65,14 @@ public abstract class FeatureProperties {
         if (isDirty()) {
             try {
                 onStore();
-                FileOutputStream fos = new FileOutputStream(getPropertiesFile());
+                final FileOutputStream fos = new FileOutputStream(getPropertiesFile());
                 getProperties().store(fos, getComment());
                 fos.flush();
                 fos.close();
                 setDirty(false);
                 onStored();
                 Bukkit.getPluginManager().callEvent(new FeaturePropertiesStoredEvent(feature));
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
         }
@@ -97,14 +97,14 @@ public abstract class FeatureProperties {
 
     protected final File getPropertiesFile() {
         if (propertiesFile == null) {
-            File f = new File(((getPropertiesDirectory() == null) ? getFeature().getFeaturePlugin().getDataFolder() : getPropertiesDirectory()), getFeature().getFeatureName()
+            final File f = new File(((getPropertiesDirectory() == null) ? getFeature().getFeaturePlugin().getDataFolder() : getPropertiesDirectory()), getFeature().getFeatureName()
                     + PROPERTIES_FILE_EXTENSION);
             if (!f.exists()) {
                 try {
                     f.createNewFile();
                     onFileCreated();
                     setDirty();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                     getFeature().setFeatureActive(false);
                 }
@@ -139,7 +139,7 @@ public abstract class FeatureProperties {
      */
     protected void onStored() {}
 
-    protected void setComment(String comment) {
+    protected void setComment(final String comment) {
         this.comment = comment;
     }
 
@@ -149,7 +149,7 @@ public abstract class FeatureProperties {
         }
     }
 
-    protected final void setPropertiesDirectory(File propertiesDirectory) {
+    protected final void setPropertiesDirectory(final File propertiesDirectory) {
         if (propertiesDirectory != null && this.propertiesDirectory == null) {
             this.propertiesDirectory = propertiesDirectory;
         }
@@ -158,7 +158,7 @@ public abstract class FeatureProperties {
     /**
      * @param dirty set this to true if there are changes to be make or to false, when the properties were successfully synchronized with the properties file.
      */
-    private void setDirty(boolean dirty) {
+    private void setDirty(final boolean dirty) {
         this.dirty = dirty;
     }
 

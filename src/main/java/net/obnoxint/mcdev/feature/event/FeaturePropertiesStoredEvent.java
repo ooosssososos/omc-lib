@@ -12,7 +12,7 @@ public final class FeaturePropertiesStoredEvent extends FeaturePropertiesEvent {
         return handlerList;
     }
 
-    public FeaturePropertiesStoredEvent(Feature feature) {
+    public FeaturePropertiesStoredEvent(final Feature feature) {
         super(feature);
     }
 

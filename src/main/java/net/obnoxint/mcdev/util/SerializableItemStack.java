@@ -14,36 +14,36 @@ public class SerializableItemStack implements Serializable {
 
     private static final long serialVersionUID = 6251309292346486453L;
 
-    public static SerializableItemStack fromString(String string) {
+    public static SerializableItemStack fromString(final String string) {
         SerializableItemStack r = null;
-        String[] s = string.split(",");
+        final String[] s = string.split(",");
 
         if (s.length == 4 || s.length == 5) {
             try {
-                int type = Integer.parseInt(s[0]);
-                int amount = Integer.parseInt(s[1]);
-                short durability = Short.parseShort(s[2]);
-                byte data = Byte.parseByte(s[3]);
-                Map<Integer, Integer> enchantments = new HashMap<>();
+                final int type = Integer.parseInt(s[0]);
+                final int amount = Integer.parseInt(s[1]);
+                final short durability = Short.parseShort(s[2]);
+                final byte data = Byte.parseByte(s[3]);
+                final Map<Integer, Integer> enchantments = new HashMap<>();
                 if (s.length == 5) {
-                    String[] es = s[4].substring(1, s[4].length() - 1).split(";");
+                    final String[] es = s[4].substring(1, s[4].length() - 1).split(";");
                     for (int i = 0; i < es.length; i++) {
-                        String[] e = es[i].split("=");
+                        final String[] e = es[i].split("=");
                         if (e.length == 2) {
                             enchantments.put(Integer.parseInt(e[0]), Integer.parseInt(e[1]));
                         }
                     }
                 }
                 r = new SerializableItemStack(type, amount, durability, data, enchantments);
-            } catch (NumberFormatException e) {}
+            } catch (final NumberFormatException e) {}
         }
 
         return r;
     }
 
-    private static Map<Integer, Integer> getEnchantmentsMap(Map<Enchantment, Integer> map) {
-        Map<Integer, Integer> r = new HashMap<>();
-        for (Enchantment e : map.keySet()) {
+    private static Map<Integer, Integer> getEnchantmentsMap(final Map<Enchantment, Integer> map) {
+        final Map<Integer, Integer> r = new HashMap<>();
+        for (final Enchantment e : map.keySet()) {
             r.put(e.getId(), map.get(e));
         }
         return r;
@@ -56,7 +56,7 @@ public class SerializableItemStack implements Serializable {
 
     private final Map<Integer, Integer> enchantments;
 
-    public SerializableItemStack(ItemStack itemStack) {
+    public SerializableItemStack(final ItemStack itemStack) {
         this(itemStack.getTypeId(),
                 itemStack.getAmount(),
                 itemStack.getDurability(),
@@ -64,7 +64,7 @@ public class SerializableItemStack implements Serializable {
                 getEnchantmentsMap(itemStack.getEnchantments()));
     }
 
-    private SerializableItemStack(int type, int amount, short durability, byte data, Map<Integer, Integer> enchantments) {
+    private SerializableItemStack(final int type, final int amount, final short durability, final byte data, final Map<Integer, Integer> enchantments) {
         this.type = type;
         this.amount = amount;
         this.durability = durability;
@@ -73,15 +73,15 @@ public class SerializableItemStack implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj != null) {
             if (obj instanceof SerializableItemStack) {
-                SerializableItemStack o = (SerializableItemStack) obj;
+                final SerializableItemStack o = (SerializableItemStack) obj;
                 return o.type == type && o.amount == amount && o.durability == durability && o.data == data && o.enchantments.equals(enchantments);
-            } else if (obj instanceof Material){
-                return ((Material)obj).getId() == type;
-            } else if (obj instanceof ItemStack){
-                ItemStack o = (ItemStack) obj;
+            } else if (obj instanceof Material) {
+                return ((Material) obj).getId() == type;
+            } else if (obj instanceof ItemStack) {
+                final ItemStack o = (ItemStack) obj;
                 return equals(new SerializableItemStack(o));
             } else if (obj instanceof String) {
                 return equals(fromString((String) obj));
@@ -99,8 +99,8 @@ public class SerializableItemStack implements Serializable {
     }
 
     public Map<Enchantment, Integer> getEnchantments() {
-        Map<Enchantment, Integer> r = new HashMap<>();
-        for (int i : enchantments.keySet()) {
+        final Map<Enchantment, Integer> r = new HashMap<>();
+        for (final int i : enchantments.keySet()) {
             r.put(Enchantment.getById(i), enchantments.get(i));
         }
         return Collections.unmodifiableMap(r);
@@ -119,9 +119,9 @@ public class SerializableItemStack implements Serializable {
     }
 
     public ItemStack toItemStack() {
-        ItemStack r = new ItemStack(getMaterial(), amount, durability, data);
-        Map<Enchantment, Integer> m = getEnchantments();
-        for (Enchantment e : m.keySet()) {
+        final ItemStack r = new ItemStack(getMaterial(), amount, durability, data);
+        final Map<Enchantment, Integer> m = getEnchantments();
+        for (final Enchantment e : m.keySet()) {
             r.addUnsafeEnchantment(e, m.get(e));
         }
         return r;
@@ -129,7 +129,7 @@ public class SerializableItemStack implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder()
+        final StringBuilder sb = new StringBuilder()
                 .append(type).append(",")
                 .append(amount).append(",")
                 .append(durability).append(",")
@@ -138,7 +138,7 @@ public class SerializableItemStack implements Serializable {
         if (!enchantments.isEmpty()) {
             sb.append(",{");
             int c = 1;
-            for (int i : enchantments.keySet()) {
+            for (final int i : enchantments.keySet()) {
                 sb.append(i).append("=").append(enchantments.get(i));
                 if (c != enchantments.size()) {
                     sb.append(";");

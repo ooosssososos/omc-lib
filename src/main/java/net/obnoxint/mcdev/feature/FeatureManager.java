@@ -11,13 +11,13 @@ import org.bukkit.plugin.Plugin;
 
 public abstract class FeatureManager implements Feature {
 
-    private HashMap<String, Feature> features = new HashMap<>();
+    private final HashMap<String, Feature> features = new HashMap<>();
 
     private String name = null;
 
     private final Plugin plugin;
 
-    public FeatureManager(Plugin plugin) {
+    public FeatureManager(final Plugin plugin) {
         if (plugin == null) {
             throw new NullPointerException();
         }
@@ -38,8 +38,8 @@ public abstract class FeatureManager implements Feature {
     }
 
     @Override
-    public void setFeatureActive(boolean active) {
-        for (Feature f : getFeatures().values()) {
+    public void setFeatureActive(final boolean active) {
+        for (final Feature f : getFeatures().values()) {
             if (active != f.isFeatureActive()) {
                 f.setFeatureActive(active);
                 Bukkit.getPluginManager().callEvent(new FeatureActiveStateChangedEvent(this, f, active));
@@ -47,11 +47,7 @@ public abstract class FeatureManager implements Feature {
         }
     }
 
-    private HashMap<String, Feature> getFeatures() {
-        return new HashMap<>(features);
-    }
-
-    protected boolean addFeature(Feature feature) {
+    protected boolean addFeature(final Feature feature) {
         if (!getFeatures().containsKey(feature.getFeatureName())) {
             features.put(feature.getFeatureName(), feature);
             Bukkit.getPluginManager().callEvent(new FeatureAddedEvent(this, feature));
@@ -60,22 +56,26 @@ public abstract class FeatureManager implements Feature {
         return false;
     }
 
-    protected Feature getFeature(String name) {
+    protected Feature getFeature(final String name) {
         return getFeatures().get(name);
     }
 
-    protected String setFeatureName(String name) {
+    protected boolean removeFeature(final Feature feature) {
+        final boolean r = features.remove(feature.getFeatureName()) != null;
+        if (r) {
+            Bukkit.getPluginManager().callEvent(new FeatureRemovedEvent(this, feature));
+        }
+        return r;
+    }
+
+    protected String setFeatureName(final String name) {
         if (this.name == null && name != null && !name.trim().isEmpty()) {
             this.name = name.trim();
         }
         return name;
     }
-        
-    protected boolean removeFeature(Feature feature){
-        boolean r = features.remove(feature.getFeatureName()) != null;
-        if (r) {
-            Bukkit.getPluginManager().callEvent(new FeatureRemovedEvent(this, feature));
-        }
-        return r;
+
+    private HashMap<String, Feature> getFeatures() {
+        return new HashMap<>(features);
     }
 }

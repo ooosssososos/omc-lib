@@ -8,7 +8,7 @@ public abstract class FeatureEvent extends Event {
 
     private final Feature feature;
 
-    protected FeatureEvent(Feature feature) {
+    protected FeatureEvent(final Feature feature) {
         this.feature = feature;
     }
 

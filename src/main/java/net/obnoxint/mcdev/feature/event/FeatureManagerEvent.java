@@ -7,7 +7,7 @@ public abstract class FeatureManagerEvent extends FeatureEvent {
 
     private final FeatureManager manager;
 
-    protected FeatureManagerEvent(FeatureManager manager, Feature feature) {
+    protected FeatureManagerEvent(final FeatureManager manager, final Feature feature) {
         super(feature);
         this.manager = manager;
     }

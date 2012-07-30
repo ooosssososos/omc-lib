@@ -6,13 +6,12 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 
 /**
  * <p>
- * This class can help to achieve a reference to any plugin instance loaded by a {@link JavaPluginLoader} if the implementing {@link Plugin} is also loaded by
- * the same JavaPluginLoader.
+ * This class can help to achieve a reference to any plugin instance loaded by a {@link JavaPluginLoader} if the implementing {@link Plugin} is also loaded by the same
+ * JavaPluginLoader.
  * </p>
  * <p>
- * If used inside an instance of Thread, this class will try to acquire a reference to a Plugin-instance of the name declared in the constructor call. The run()
- * method can also be called manually but will block until the reference was acquired. It is therefore recommended to call the run() method by the start()
- * method of a Thread-instance.
+ * If used inside an instance of Thread, this class will try to acquire a reference to a Plugin-instance of the name declared in the constructor call. The run() method can also be
+ * called manually but will block until the reference was acquired. It is therefore recommended to call the run() method by the start() method of a Thread-instance.
  * </p>
  * <p>
  * As soon as the reference was acquired the getPlugin() method will return the Plugin-instance. Before that it will always return null.
@@ -24,8 +23,8 @@ public final class PluginInstanceRequirementHelper implements Runnable {
 
     /**
      * <p>
-     * A class implementing this interface must be passed to the constructor of {@link PluginInstanceRequirementHelper}. As soon as a reference to the requested
-     * plugin was acquired, the onPluginInstanceAcquired()-method will be called passing a reference to the requested {@link Plugin}
+     * A class implementing this interface must be passed to the constructor of {@link PluginInstanceRequirementHelper}. As soon as a reference to the requested plugin was
+     * acquired, the onPluginInstanceAcquired()-method will be called passing a reference to the requested {@link Plugin}
      * </p>
      * <p>
      * The same instance of the implementing class can be (re-)used to acquire different plugin references.
@@ -61,7 +60,7 @@ public final class PluginInstanceRequirementHelper implements Runnable {
      *            be thrown.
      * @param requester the instance of {@link PluginInstanceRequester} to notify as soon as a reference was acquired.
      */
-    public PluginInstanceRequirementHelper(String pluginName, PluginInstanceRequester requester) {
+    public PluginInstanceRequirementHelper(final String pluginName, final PluginInstanceRequester requester) {
         if (pluginName == null || requester == null || pluginName.trim().isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -86,7 +85,7 @@ public final class PluginInstanceRequirementHelper implements Runnable {
     }
 
     /**
-     * @return true if the execution has been stopped by calling the stop() method.  
+     * @return true if the execution has been stopped by calling the stop() method.
      */
     public boolean isStopped() {
         return stopped;
@@ -102,7 +101,7 @@ public final class PluginInstanceRequirementHelper implements Runnable {
     @Override
     public void run() {
         long lastRun = System.currentTimeMillis();
-        synchronized (this) {            
+        synchronized (this) {
             while (!isAcquired() && !isStopped() && (lastRun + INTERVAL < System.currentTimeMillis())) {
                 setPlugin(Bukkit.getPluginManager().getPlugin(getPluginName()));
                 lastRun += INTERVAL;
@@ -133,7 +132,7 @@ public final class PluginInstanceRequirementHelper implements Runnable {
         }
     }
 
-    private void setPlugin(Plugin plugin) {
+    private void setPlugin(final Plugin plugin) {
         if (plugin != null) {
             this.plugin = plugin;
             setAcquired();

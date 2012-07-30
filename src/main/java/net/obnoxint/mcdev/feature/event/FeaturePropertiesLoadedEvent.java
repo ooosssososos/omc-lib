@@ -12,7 +12,7 @@ public final class FeaturePropertiesLoadedEvent extends FeaturePropertiesEvent {
         return handlerList;
     }
 
-    public FeaturePropertiesLoadedEvent(Feature feature) {
+    public FeaturePropertiesLoadedEvent(final Feature feature) {
         super(feature);
     }
 

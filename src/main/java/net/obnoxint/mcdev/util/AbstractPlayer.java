@@ -58,7 +58,7 @@ public abstract class AbstractPlayer implements Player {
     private final String playerName;
     private Player player;
 
-    public AbstractPlayer(Player player) {
+    public AbstractPlayer(final Player player) {
         if (player == null) {
             throw new IllegalArgumentException();
         }
@@ -67,72 +67,72 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void abandonConversation(Conversation conversation) {
+    public void abandonConversation(final Conversation conversation) {
         player.abandonConversation(conversation);
     }
 
     @Override
-    public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
+    public void abandonConversation(final Conversation conversation, final ConversationAbandonedEvent details) {
         player.abandonConversation(conversation, details);
     }
 
     @Override
-    public void acceptConversationInput(String input) {
+    public void acceptConversationInput(final String input) {
         player.acceptConversationInput(input);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin) {
+    public PermissionAttachment addAttachment(final Plugin plugin) {
         return player.addAttachment(plugin);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+    public PermissionAttachment addAttachment(final Plugin plugin, final int ticks) {
         return player.addAttachment(plugin, ticks);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+    public PermissionAttachment addAttachment(final Plugin plugin, final String name, final boolean value) {
         return player.addAttachment(plugin, name, value);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+    public PermissionAttachment addAttachment(final Plugin plugin, final String name, final boolean value, final int ticks) {
         return player.addAttachment(plugin, name, value, ticks);
     }
 
     @Override
-    public boolean addPotionEffect(PotionEffect effect) {
+    public boolean addPotionEffect(final PotionEffect effect) {
         return player.addPotionEffect(effect);
     }
 
     @Override
-    public boolean addPotionEffect(PotionEffect effect, boolean force) {
+    public boolean addPotionEffect(final PotionEffect effect, final boolean force) {
         return player.addPotionEffect(effect, force);
     }
 
     @Override
-    public boolean addPotionEffects(Collection<PotionEffect> effects) {
+    public boolean addPotionEffects(final Collection<PotionEffect> effects) {
         return player.addPotionEffects(effects);
     }
 
     @Override
-    public void awardAchievement(Achievement achievement) {
+    public void awardAchievement(final Achievement achievement) {
         player.awardAchievement(achievement);
     }
 
     @Override
-    public boolean beginConversation(Conversation conversation) {
+    public boolean beginConversation(final Conversation conversation) {
         return player.beginConversation(conversation);
     }
 
     @Override
-    public boolean canSee(Player player) {
+    public boolean canSee(final Player player) {
         return player.canSee(player);
     }
 
     @Override
-    public void chat(String msg) {
+    public void chat(final String msg) {
         player.chat(msg);
     }
 
@@ -142,12 +142,12 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void damage(int amount) {
+    public void damage(final int amount) {
         player.damage(amount);
     }
 
     @Override
-    public void damage(int amount, Entity source) {
+    public void damage(final int amount, final Entity source) {
         player.damage(amount, source);
     }
 
@@ -217,7 +217,7 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public double getEyeHeight(boolean ignoreSneaking) {
+    public double getEyeHeight(final boolean ignoreSneaking) {
         return player.getEyeHeight(ignoreSneaking);
     }
 
@@ -292,7 +292,7 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
+    public List<Block> getLastTwoTargetBlocks(final HashSet<Byte> transparent, final int maxDistance) {
         return player.getLastTwoTargetBlocks(transparent, maxDistance);
     }
 
@@ -302,7 +302,7 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public List<Block> getLineOfSight(HashSet<Byte> transparent, int maxDistance) {
+    public List<Block> getLineOfSight(final HashSet<Byte> transparent, final int maxDistance) {
         return player.getLineOfSight(transparent, maxDistance);
     }
 
@@ -337,7 +337,7 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public List<MetadataValue> getMetadata(String metadataKey) {
+    public List<MetadataValue> getMetadata(final String metadataKey) {
         return player.getMetadata(metadataKey);
     }
 
@@ -347,7 +347,7 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public List<Entity> getNearbyEntities(double x, double y, double z) {
+    public List<Entity> getNearbyEntities(final double x, final double y, final double z) {
         return player.getNearbyEntities(x, y, z);
     }
 
@@ -417,7 +417,7 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
+    public Block getTargetBlock(final HashSet<Byte> transparent, final int maxDistance) {
         return player.getTargetBlock(transparent, maxDistance);
     }
 
@@ -457,27 +457,27 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void giveExp(int amount) {
+    public void giveExp(final int amount) {
         player.giveExp(amount);
     }
 
     @Override
-    public boolean hasLineOfSight(Entity other) {
+    public boolean hasLineOfSight(final Entity other) {
         return player.hasLineOfSight(other);
     }
 
     @Override
-    public boolean hasMetadata(String metadataKey) {
+    public boolean hasMetadata(final String metadataKey) {
         return player.hasMetadata(metadataKey);
     }
 
     @Override
-    public boolean hasPermission(Permission perm) {
+    public boolean hasPermission(final Permission perm) {
         return player.hasPermission(perm);
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(final String name) {
         return player.hasPermission(name);
     }
 
@@ -487,32 +487,32 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public boolean hasPotionEffect(PotionEffectType type) {
+    public boolean hasPotionEffect(final PotionEffectType type) {
         return player.hasPotionEffect(type);
     }
 
     @Override
-    public void hidePlayer(Player player) {
+    public void hidePlayer(final Player player) {
         player.hidePlayer(player);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic) {
+    public void incrementStatistic(final Statistic statistic) {
         player.incrementStatistic(statistic);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, int amount) {
+    public void incrementStatistic(final Statistic statistic, final int amount) {
         player.incrementStatistic(statistic, amount);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material) {
+    public void incrementStatistic(final Statistic statistic, final Material material) {
         player.incrementStatistic(statistic, material);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material, int amount) {
+    public void incrementStatistic(final Statistic statistic, final Material material, final int amount) {
         player.incrementStatistic(statistic, material, amount);
     }
 
@@ -562,12 +562,12 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public boolean isPermissionSet(Permission perm) {
+    public boolean isPermissionSet(final Permission perm) {
         return player.isPermissionSet(perm);
     }
 
     @Override
-    public boolean isPermissionSet(String name) {
+    public boolean isPermissionSet(final String name) {
         return player.isPermissionSet(name);
     }
 
@@ -607,12 +607,12 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void kickPlayer(String message) {
+    public void kickPlayer(final String message) {
         player.kickPlayer(message);
     }
 
     @Override
-    public <T extends Projectile> T launchProjectile(Class<? extends T> projectile) {
+    public <T extends Projectile> T launchProjectile(final Class<? extends T> projectile) {
         return player.launchProjectile(projectile);
     }
 
@@ -627,52 +627,52 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public InventoryView openEnchanting(Location location, boolean force) {
+    public InventoryView openEnchanting(final Location location, final boolean force) {
         return player.openEnchanting(location, force);
     }
 
     @Override
-    public InventoryView openInventory(Inventory inventory) {
+    public InventoryView openInventory(final Inventory inventory) {
         return player.openInventory(inventory);
     }
 
     @Override
-    public void openInventory(InventoryView inventory) {
+    public void openInventory(final InventoryView inventory) {
         player.openInventory(inventory);
     }
 
     @Override
-    public InventoryView openWorkbench(Location location, boolean force) {
+    public InventoryView openWorkbench(final Location location, final boolean force) {
         return player.openWorkbench(location, force);
     }
 
     @Override
-    public boolean performCommand(String command) {
+    public boolean performCommand(final String command) {
         return player.performCommand(command);
     }
 
     @Override
-    public void playEffect(EntityEffect type) {
+    public void playEffect(final EntityEffect type) {
         player.playEffect(type);
     }
 
     @Override
-    public void playEffect(Location loc, Effect effect, int data) {
+    public void playEffect(final Location loc, final Effect effect, final int data) {
         player.playEffect(loc, effect, data);
     }
 
     @Override
-    public <T> void playEffect(Location loc, Effect effect, T data) {
+    public <T> void playEffect(final Location loc, final Effect effect, final T data) {
         player.playEffect(loc, effect, data);
     }
 
     @Override
-    public void playNote(Location loc, byte instrument, byte note) {
+    public void playNote(final Location loc, final byte instrument, final byte note) {
         player.playNote(loc, instrument, note);
     }
 
     @Override
-    public void playNote(Location loc, Instrument instrument, Note note) {
+    public void playNote(final Location loc, final Instrument instrument, final Note note) {
         player.playNote(loc, instrument, note);
     }
 
@@ -687,17 +687,17 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void removeAttachment(PermissionAttachment attachment) {
+    public void removeAttachment(final PermissionAttachment attachment) {
         player.removeAttachment(attachment);
     }
 
     @Override
-    public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+    public void removeMetadata(final String metadataKey, final Plugin owningPlugin) {
         player.removeMetadata(metadataKey, owningPlugin);
     }
 
     @Override
-    public void removePotionEffect(PotionEffectType type) {
+    public void removePotionEffect(final PotionEffectType type) {
         player.removePotionEffect(type);
     }
 
@@ -712,42 +712,42 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void sendBlockChange(Location loc, int material, byte data) {
+    public void sendBlockChange(final Location loc, final int material, final byte data) {
         player.sendBlockChange(loc, material, data);
     }
 
     @Override
-    public void sendBlockChange(Location loc, Material material, byte data) {
+    public void sendBlockChange(final Location loc, final Material material, final byte data) {
         player.sendBlockChange(loc, material, data);
     }
 
     @Override
-    public boolean sendChunkChange(Location loc, int sx, int sy, int sz, byte[] data) {
+    public boolean sendChunkChange(final Location loc, final int sx, final int sy, final int sz, final byte[] data) {
         return player.sendChunkChange(loc, sx, sy, sz, data);
     }
 
     @Override
-    public void sendMap(MapView map) {
+    public void sendMap(final MapView map) {
         player.sendMap(map);
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(final String message) {
         player.sendMessage(message);
     }
 
     @Override
-    public void sendMessage(String[] messages) {
+    public void sendMessage(final String[] messages) {
         player.sendMessage(messages);
     }
 
     @Override
-    public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+    public void sendPluginMessage(final Plugin source, final String channel, final byte[] message) {
         player.sendPluginMessage(source, channel, message);
     }
 
     @Override
-    public void sendRawMessage(String message) {
+    public void sendRawMessage(final String message) {
         player.sendRawMessage(message);
     }
 
@@ -757,182 +757,182 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void setAllowFlight(boolean flight) {
+    public void setAllowFlight(final boolean flight) {
         player.setAllowFlight(flight);
     }
 
     @Override
-    public void setBanned(boolean banned) {
+    public void setBanned(final boolean banned) {
         player.setBanned(banned);
     }
 
     @Override
-    public void setBedSpawnLocation(Location location) {
+    public void setBedSpawnLocation(final Location location) {
         player.setBedSpawnLocation(location);
     }
 
     @Override
-    public void setCompassTarget(Location loc) {
+    public void setCompassTarget(final Location loc) {
         player.setCompassTarget(loc);
     }
 
     @Override
-    public void setDisplayName(String name) {
+    public void setDisplayName(final String name) {
         player.setDisplayName(name);
     }
 
     @Override
-    public void setExhaustion(float value) {
+    public void setExhaustion(final float value) {
         player.setExhaustion(value);
     }
 
     @Override
-    public void setExp(float exp) {
+    public void setExp(final float exp) {
         player.setExp(exp);
     }
 
     @Override
-    public void setFallDistance(float distance) {
+    public void setFallDistance(final float distance) {
         player.setFallDistance(distance);
     }
 
     @Override
-    public void setFireTicks(int ticks) {
+    public void setFireTicks(final int ticks) {
         player.setFireTicks(ticks);
     }
 
     @Override
-    public void setFlying(boolean value) {
+    public void setFlying(final boolean value) {
         player.setFlying(value);
     }
 
     @Override
-    public void setFoodLevel(int value) {
+    public void setFoodLevel(final int value) {
         player.setFoodLevel(value);
     }
 
     @Override
-    public void setGameMode(GameMode mode) {
+    public void setGameMode(final GameMode mode) {
         player.setGameMode(mode);
     }
 
     @Override
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         player.setHealth(health);
     }
 
     @Override
-    public void setItemInHand(ItemStack item) {
+    public void setItemInHand(final ItemStack item) {
         player.setItemInHand(item);
     }
 
     @Override
-    public void setItemOnCursor(ItemStack item) {
+    public void setItemOnCursor(final ItemStack item) {
         player.setItemOnCursor(item);
     }
 
     @Override
-    public void setLastDamage(int damage) {
+    public void setLastDamage(final int damage) {
         player.setLastDamage(damage);
     }
 
     @Override
-    public void setLastDamageCause(EntityDamageEvent event) {
+    public void setLastDamageCause(final EntityDamageEvent event) {
         player.setLastDamageCause(event);
     }
 
     @Override
-    public void setLevel(int level) {
+    public void setLevel(final int level) {
         player.setLevel(level);
     }
 
     @Override
-    public void setMaximumAir(int ticks) {
+    public void setMaximumAir(final int ticks) {
         player.setMaximumAir(ticks);
     }
 
     @Override
-    public void setMaximumNoDamageTicks(int ticks) {
+    public void setMaximumNoDamageTicks(final int ticks) {
         player.setMaximumNoDamageTicks(ticks);
     }
 
     @Override
-    public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+    public void setMetadata(final String metadataKey, final MetadataValue newMetadataValue) {
         player.setMetadata(metadataKey, newMetadataValue);
     }
 
     @Override
-    public void setNoDamageTicks(int ticks) {
+    public void setNoDamageTicks(final int ticks) {
         player.setNoDamageTicks(ticks);
     }
 
     @Override
-    public void setOp(boolean value) {
+    public void setOp(final boolean value) {
         player.setOp(value);
     }
 
     @Override
-    public boolean setPassenger(Entity passenger) {
+    public boolean setPassenger(final Entity passenger) {
         return player.setPassenger(passenger);
     }
 
     @Override
-    public void setPlayerListName(String name) {
+    public void setPlayerListName(final String name) {
         player.setPlayerListName(name);
     }
 
     @Override
-    public void setPlayerTime(long time, boolean relative) {
+    public void setPlayerTime(final long time, final boolean relative) {
         player.setPlayerTime(time, relative);
     }
 
     @Override
-    public void setRemainingAir(int ticks) {
+    public void setRemainingAir(final int ticks) {
         player.setRemainingAir(ticks);
     }
 
     @Override
-    public void setSaturation(float value) {
+    public void setSaturation(final float value) {
         player.setSaturation(value);
     }
 
     @Override
-    public void setSleepingIgnored(boolean isSleeping) {
+    public void setSleepingIgnored(final boolean isSleeping) {
         player.setSleepingIgnored(isSleeping);
     }
 
     @Override
-    public void setSneaking(boolean sneak) {
+    public void setSneaking(final boolean sneak) {
         player.setSneaking(sneak);
     }
 
     @Override
-    public void setSprinting(boolean sprinting) {
+    public void setSprinting(final boolean sprinting) {
         player.setSprinting(sprinting);
     }
 
     @Override
-    public void setTicksLived(int value) {
+    public void setTicksLived(final int value) {
         player.setTicksLived(value);
     }
 
     @Override
-    public void setTotalExperience(int exp) {
+    public void setTotalExperience(final int exp) {
         player.setTotalExperience(exp);
     }
 
     @Override
-    public void setVelocity(Vector velocity) {
+    public void setVelocity(final Vector velocity) {
         player.setVelocity(velocity);
     }
 
     @Override
-    public void setWhitelisted(boolean value) {
+    public void setWhitelisted(final boolean value) {
         player.setWhitelisted(value);
     }
 
     @Override
-    public boolean setWindowProperty(Property prop, int value) {
+    public boolean setWindowProperty(final Property prop, final int value) {
         return player.setWindowProperty(prop, value);
     }
 
@@ -943,27 +943,27 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void showPlayer(Player player) {
+    public void showPlayer(final Player player) {
         player.showPlayer(player);
     }
 
     @Override
-    public boolean teleport(Entity destination) {
+    public boolean teleport(final Entity destination) {
         return player.teleport(destination);
     }
 
     @Override
-    public boolean teleport(Entity destination, TeleportCause cause) {
+    public boolean teleport(final Entity destination, final TeleportCause cause) {
         return player.teleport(destination, cause);
     }
 
     @Override
-    public boolean teleport(Location location) {
+    public boolean teleport(final Location location) {
         return player.teleport(location);
     }
 
     @Override
-    public boolean teleport(Location location, TeleportCause cause) {
+    public boolean teleport(final Location location, final TeleportCause cause) {
         return player.teleport(location, cause);
     }
 
@@ -983,7 +983,7 @@ public abstract class AbstractPlayer implements Player {
      * @throws IllegalStateException
      */
     public final void update() throws IllegalStateException {
-        Player p = Bukkit.getPlayerExact(playerName);
+        final Player p = Bukkit.getPlayerExact(playerName);
         if (p == null) {
             throw new IllegalStateException();
         }

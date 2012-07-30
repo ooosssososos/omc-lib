@@ -4,7 +4,7 @@ import net.obnoxint.mcdev.feature.Feature;
 
 public abstract class FeaturePropertiesEvent extends FeatureEvent {
 
-    protected FeaturePropertiesEvent(Feature feature) {
+    protected FeaturePropertiesEvent(final Feature feature) {
         super(feature);
     }
 

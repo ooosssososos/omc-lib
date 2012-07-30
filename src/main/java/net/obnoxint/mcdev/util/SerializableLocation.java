@@ -10,9 +10,9 @@ public class SerializableLocation implements Serializable {
 
     private static final long serialVersionUID = 8130077079595390518L;
 
-    public static SerializableLocation fromString(String string) {
+    public static SerializableLocation fromString(final String string) {
         if (string != null && !string.isEmpty()) {
-            String[] s = string.trim().split(" ");
+            final String[] s = string.trim().split(" ");
             try {
                 String worldName;
                 double x, y, z;
@@ -35,7 +35,7 @@ public class SerializableLocation implements Serializable {
                     return null;
                 }
                 return new SerializableLocation(worldName, x, y, z, pitch, yaw);
-            } catch (NumberFormatException e) {}
+            } catch (final NumberFormatException e) {}
         }
         return null;
     }
@@ -46,15 +46,15 @@ public class SerializableLocation implements Serializable {
 
     private final double x, y, z;
 
-    public SerializableLocation(Location location) {
+    public SerializableLocation(final Location location) {
         this(location.getWorld().getName(), location.getX(), location.getBlockY(), location.getZ(), location.getPitch(), location.getYaw());
     }
 
-    public SerializableLocation(String worldName, double x, double y, double z) {
+    public SerializableLocation(final String worldName, final double x, final double y, final double z) {
         this(worldName, x, y, z, 0f, 0f);
     }
 
-    public SerializableLocation(String worldName, double x, double y, double z, float pitch, float yaw) {
+    public SerializableLocation(final String worldName, final double x, final double y, final double z, final float pitch, final float yaw) {
         this.worldName = worldName;
         this.x = x;
         this.y = y;
@@ -64,13 +64,13 @@ public class SerializableLocation implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj != null) {
             if (obj instanceof SerializableLocation) {
-                SerializableLocation l = (SerializableLocation) obj;
+                final SerializableLocation l = (SerializableLocation) obj;
                 return l.worldName.equals(worldName) && l.x == x && l.y == y && l.z == z && l.pitch == pitch && l.yaw == yaw;
             } else if (obj instanceof Location) {
-                Location l = (Location) obj;
+                final Location l = (Location) obj;
                 return new SerializableLocation(l).equals(this);
             } else if (obj instanceof World) {
                 return ((World) obj).getName().equals(worldName);

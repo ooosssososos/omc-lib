@@ -18,7 +18,7 @@ public final class RuntimeUtils {
 
     public static String[] getClassPathElements() {
         final List<String> r = new ArrayList<>();
-        String[] a = System.getProperty(CLASSPATH_PROPERTY).split(File.pathSeparator);
+        final String[] a = System.getProperty(CLASSPATH_PROPERTY).split(File.pathSeparator);
         for (final String s : a) {
             if (!s.trim().isEmpty()) {
                 r.add(s);
@@ -27,22 +27,22 @@ public final class RuntimeUtils {
         return r.toArray(new String[r.size()]);
     }
 
-    public static String getStackTraceString(Throwable throwable) {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw, true);
+    public static String getStackTraceString(final Throwable throwable) {
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw, true);
         throwable.printStackTrace(pw);
         pw.flush();
         pw.close();
         return sw.toString();
     }
 
-    public static String[] getStackTraceStringArray(Exception e) {
+    public static String[] getStackTraceStringArray(final Exception e) {
         return (e == null) ? null : getStackTraceStringArray(e.getStackTrace());
     }
 
-    public static String[] getStackTraceStringArray(StackTraceElement[] stack) {
+    public static String[] getStackTraceStringArray(final StackTraceElement[] stack) {
         if (stack != null) {
-            String[] r = new String[stack.length];
+            final String[] r = new String[stack.length];
             for (int i = 0; i < stack.length; i++) {
                 r[i] = stack[i].toString();
             }

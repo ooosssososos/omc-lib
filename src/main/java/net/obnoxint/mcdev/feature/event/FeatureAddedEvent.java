@@ -13,7 +13,7 @@ public final class FeatureAddedEvent extends FeatureManagerEvent {
         return handlerList;
     }
 
-    public FeatureAddedEvent(FeatureManager manager, Feature feature) {
+    public FeatureAddedEvent(final FeatureManager manager, final Feature feature) {
         super(manager, feature);
     }
 
