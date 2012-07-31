@@ -30,6 +30,8 @@ final class MetricsAdapter implements Runnable {
     private static final String CUSTOM_DATA_SEPARATOR = "~~";
     private static final String URL_ENCODING = "UTF-8";
 
+    private static final String RESPONSE_ERROR = "ERR";
+    private static final String RESPONSE_OK = "OK This is your first update this hour";
     private static final String SEP = "=";
     private static final String VAL_SEP = "&";
 
@@ -128,9 +130,9 @@ final class MetricsAdapter implements Runnable {
                 br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 response = br.readLine();
                 br.close();
-                if (response == null || response.startsWith("ERR")) {
+                if (response == null || response.startsWith(RESPONSE_ERROR)) {
                     throw new IOException(response);
-                } else { // reset the plotters and put them back in the instance
+                } else if (response.contains(RESPONSE_OK)) { // reset the plotters and put them back in the instance
                     final Set<MetricsGraph> graphs = new HashSet<>();
                     for (final String gn : mi.getGraphNames()) {
                         final MetricsGraph graph = new MetricsGraph(mi.getGraph(gn));
