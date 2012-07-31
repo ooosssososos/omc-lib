@@ -99,7 +99,7 @@ public final class MetricsGraph implements Serializable {
     public boolean updatePlotter(final MetricsPlotter plotter) {
         final boolean r = removePlotter(plotter);
         if (r) {
-            plotters.add(plotter);
+            plotters.add(new MetricsPlotter(plotter));
         }
         return r;
     }

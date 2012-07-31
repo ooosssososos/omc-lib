@@ -96,7 +96,7 @@ public final class MetricsInstance implements Serializable {
     public boolean updateGraph(final MetricsGraph graph) {
         final boolean r = removeGraph(graph);
         if (r) {
-            graphs.add(graph);
+            graphs.add(new MetricsGraph(graph));
         }
         return r;
     }
