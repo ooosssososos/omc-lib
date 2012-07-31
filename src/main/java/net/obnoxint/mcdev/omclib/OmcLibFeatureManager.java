@@ -49,6 +49,14 @@ public final class OmcLibFeatureManager extends FeatureManager {
         return properties;
     }
 
+    public boolean hasFeature(final Feature feature) {
+        return hasFeature(feature.getFeatureName());
+    }
+
+    public boolean hasFeature(final String name) {
+        return getFeatures().containsKey(name);
+    }
+
     @Override
     public boolean isFeatureActive() {
         return active;
