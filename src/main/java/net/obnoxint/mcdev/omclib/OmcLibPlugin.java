@@ -2,6 +2,7 @@ package net.obnoxint.mcdev.omclib;
 
 import java.io.File;
 
+import net.obnoxint.mcdev.omclib.metrics.OmcLibMetricsFeature;
 import net.obnoxint.util.RuntimeUtils;
 import net.obnoxint.util.VersionNumber;
 import net.obnoxint.util.VersionNumber.Versioned;
@@ -59,6 +60,10 @@ public final class OmcLibPlugin extends JavaPlugin implements Versioned {
 
     public OmcLibFeatureManager getFeatureManager() {
         return featureManager;
+    }
+
+    public OmcLibMetricsFeature getMetricsFeature() {
+        return (OmcLibMetricsFeature) featureManager.getFeature(ImplementedFeature.METRICS.getName());
     }
 
     public PlayerProperties getPlayerProperties(final Player player) {
