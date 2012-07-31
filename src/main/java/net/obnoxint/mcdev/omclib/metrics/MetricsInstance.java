@@ -75,6 +75,24 @@ public final class MetricsInstance implements Serializable {
         return graphs.remove(graph);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder(pluginName + "=");
+        final String[] g = getGraphNames();
+        for (int i = 0; i < g.length; i++) {
+            if (i == 0) {
+                sb.append("{");
+            }
+            sb.append(getGraph(g[i]).toString());
+            if (i == g.length - 1) {
+                sb.append("}");
+            } else {
+                sb.append(";");
+            }
+        }
+        return sb.toString();
+    }
+
     public boolean updateGraph(final MetricsGraph graph) {
         final boolean r = removeGraph(graph);
         if (r) {

@@ -78,6 +78,24 @@ public final class MetricsGraph implements Serializable {
         return plotters.remove(plotter);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder(name + "=");
+        final String[] p = getPlotterIds();
+        for (int i = 0; i < p.length; i++) {
+            if (i == 0) {
+                sb.append("[");
+            }
+            sb.append(getPlotter(p[i]).toString());
+            if (i == p.length - 1) {
+                sb.append("]");
+            } else {
+                sb.append(";");
+            }
+        }
+        return sb.toString();
+    }
+
     public boolean updatePlotter(final MetricsPlotter plotter) {
         final boolean r = removePlotter(plotter);
         if (r) {
@@ -85,5 +103,4 @@ public final class MetricsGraph implements Serializable {
         }
         return r;
     }
-
 }

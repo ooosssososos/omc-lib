@@ -38,4 +38,9 @@ public class MetricsPlotter extends Stat implements Serializable {
         this.persistent = persistent;
     }
 
+    @Override
+    public String toString() {
+        return getId() + "=" + getBalance();
+    }
+
 }
