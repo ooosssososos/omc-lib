@@ -60,6 +60,10 @@ public abstract class FeatureManager implements Feature {
         return getFeatures().get(name);
     }
 
+    protected final HashMap<String, Feature> getFeatures() {
+        return new HashMap<>(features);
+    }
+
     protected boolean removeFeature(final Feature feature) {
         final boolean r = features.remove(feature.getFeatureName()) != null;
         if (r) {
@@ -73,9 +77,5 @@ public abstract class FeatureManager implements Feature {
             this.name = name.trim();
         }
         return name;
-    }
-
-    private HashMap<String, Feature> getFeatures() {
-        return new HashMap<>(features);
     }
 }
