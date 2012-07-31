@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import net.obnoxint.mcdev.omclib.OmcLibPlugin;
@@ -144,7 +146,7 @@ final class MetricsAdapter implements Runnable {
                     feature.getMetricsInstance(p).putGraphs(graphs.toArray(new MetricsGraph[graphs.size()]));
                 }
                 if (feature.getFeatureProperties().isCreateReportDump()) { // create a dump log if the user wants to
-                    getDumpLogger().info(urlData.toString());
+                    getDumpLogger().info("Metrics data sent: " + urlData.toString());
                 }
             }
         }
@@ -165,7 +167,16 @@ final class MetricsAdapter implements Runnable {
         if (dumpLogger == null) {
             dumpLogger = Logger.getAnonymousLogger();
             try {
-                dumpLogger.addHandler(new FileHandler(new File(feature.getFeatureFolder(), "report.txt").getAbsolutePath()));
+                final FileHandler fh = new FileHandler(new File(feature.getFeatureFolder(), "report.txt").getAbsolutePath());
+                fh.setFormatter(new Formatter() {
+
+                    @Override
+                    public String format(final LogRecord record) {
+                        return record.getMessage() + "\n";
+                    }
+
+                });
+                dumpLogger.addHandler(fh);
             } catch (SecurityException | IOException e) {
                 e.printStackTrace();
             }
