@@ -62,7 +62,7 @@ public final class OmcLibMetricsFeature implements Feature {
         return adapter.getLastReportDate();
     }
 
-    public MetricsInstance getMetricsInstance(final Plugin plugin) {
+    public synchronized MetricsInstance getMetricsInstance(final Plugin plugin) {
         final String n = plugin.getName();
         if (!metricsInstances.containsKey(n)) {
             loadInstanceFile(plugin);
@@ -103,7 +103,7 @@ public final class OmcLibMetricsFeature implements Feature {
         return featureFolder;
     }
 
-    Map<String, MetricsInstance> getMetricsInstances() {
+    synchronized Map<String, MetricsInstance> getMetricsInstances() {
         return new HashMap<>(metricsInstances);
     }
 
