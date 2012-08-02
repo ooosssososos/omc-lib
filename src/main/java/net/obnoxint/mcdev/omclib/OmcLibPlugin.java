@@ -7,7 +7,6 @@ import net.obnoxint.util.RuntimeUtils;
 import net.obnoxint.util.VersionNumber;
 import net.obnoxint.util.VersionNumber.Versioned;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,12 +34,17 @@ public final class OmcLibPlugin extends JavaPlugin implements Versioned {
     private UIDProvider uidProvider;
     private OmcLibFeatureManager featureManager;
     private PlayerPropertiesManager playerPropertiesManager;
+    private OmcCommandExecutor commandExecutor;
 
     private File dataFolder = null;
 
     public OmcLibPlugin() {
         prepareClassPath();
         instance = this;
+    }
+
+    public OmcCommandExecutor getCommandExecutor() {
+        return commandExecutor;
     }
 
     /**
@@ -93,7 +97,8 @@ public final class OmcLibPlugin extends JavaPlugin implements Versioned {
         uidProvider = new UIDProvider(this);
         playerPropertiesManager = new PlayerPropertiesManager(this);
         featureManager = new OmcLibFeatureManager(this);
-        getCommand("omc").setExecutor(new OmcCommandExecutor());
+        commandExecutor = new OmcCommandExecutor();
+        getCommand("omc").setExecutor(commandExecutor);
     }
 
 }
