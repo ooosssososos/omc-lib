@@ -3,6 +3,7 @@ package net.obnoxint.mcdev.omclib;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.obnoxint.mcdev.omclib.command.DebugCommandHandler;
 import net.obnoxint.mcdev.omclib.command.OmcCommandHandler;
 
 import org.bukkit.command.Command;
@@ -12,9 +13,25 @@ import org.bukkit.permissions.Permission;
 
 final class OmcCommandExecutor implements CommandExecutor {
 
+    private enum DefaultHandler {
+        DEBUG(DebugCommandHandler.class);
+
+        private final Class<? extends OmcCommandHandler> clazz;
+
+        private DefaultHandler(final Class<? extends OmcCommandHandler> clazz) {
+            this.clazz = clazz;
+        }
+    }
+
     private final Map<String, OmcCommandHandler> handlers = new TreeMap<>();
 
-    OmcCommandExecutor() {}
+    OmcCommandExecutor() {
+        for (final DefaultHandler h : DefaultHandler.values()) {
+            try {
+                addHandler(h.clazz.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {}
+        }
+    }
 
     public void addHandler(final OmcCommandHandler handler) {
         final String id = handler.getId();
