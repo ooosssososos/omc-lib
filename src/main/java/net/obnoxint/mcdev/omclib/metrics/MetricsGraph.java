@@ -1,22 +1,22 @@
 package net.obnoxint.mcdev.omclib.metrics;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class MetricsGraph implements Serializable {
 
-    private static final long serialVersionUID = 148171122271697066L;
+    private static final long serialVersionUID = -3445888940253779398L;
 
     public static final String DEFAULT = "Default";
 
     private final String name;
-    private volatile Set<MetricsPlotter> plotters = new HashSet<>();
+    private final Map<String, MetricsPlotter> plotters = new HashMap<>();
 
     MetricsGraph(final MetricsGraph graph) {
         this.name = graph.name;
-        for (final MetricsPlotter plotter : graph.plotters) {
-            this.plotters.add(new MetricsPlotter(plotter));
+        for (final String id : graph.plotters.keySet()) {
+            this.plotters.put(id, new MetricsPlotter(graph.plotters.get(id)));
         }
     }
 
@@ -25,7 +25,12 @@ public final class MetricsGraph implements Serializable {
     }
 
     public boolean addPlotter(final MetricsPlotter plotter) {
-        return plotters.add(plotter);
+        final String id = plotter.getId();
+        if (!plotters.containsKey(id)) {
+            plotters.put(id, plotter);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -51,15 +56,11 @@ public final class MetricsGraph implements Serializable {
     public MetricsPlotter getPlotter(String id) {
         if (id != null && !id.trim().isEmpty()) {
             id = id.trim();
-            if (plotters.contains(id)) {
-                for (final MetricsPlotter plotter : plotters) {
-                    if (plotter.equals(id)) {
-                        return new MetricsPlotter(plotter);
-                    }
-                }
+            if (plotters.containsKey(id)) {
+                return new MetricsPlotter(plotters.get(id));
             } else {
                 final MetricsPlotter plotter = new MetricsPlotter(id);
-                plotters.add(plotter);
+                plotters.put(id, plotter);
                 return plotter;
             }
         }
@@ -67,15 +68,12 @@ public final class MetricsGraph implements Serializable {
     }
 
     public String[] getPlotterIds() {
-        final Set<String> ids = new HashSet<>();
-        for (final MetricsPlotter plotter : plotters) {
-            ids.add(plotter.getId());
-        }
-        return ids.toArray(new String[ids.size()]);
+        final int l = plotters.size();
+        return plotters.keySet().toArray(new String[l]);
     }
 
     public boolean removePlotter(final MetricsPlotter plotter) {
-        return plotters.remove(plotter);
+        return plotters.remove(plotter.getId()) != null;
     }
 
     @Override
@@ -99,7 +97,7 @@ public final class MetricsGraph implements Serializable {
     public boolean updatePlotter(final MetricsPlotter plotter) {
         final boolean r = removePlotter(plotter);
         if (r) {
-            plotters.add(new MetricsPlotter(plotter));
+            plotters.put(plotter.getId(), new MetricsPlotter(plotter));
         }
         return r;
     }

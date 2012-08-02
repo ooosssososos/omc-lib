@@ -1,22 +1,22 @@
 package net.obnoxint.mcdev.omclib.metrics;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.plugin.Plugin;
 
 public final class MetricsInstance implements Serializable {
 
-    private static final long serialVersionUID = 7748827513427590997L;
+    private static final long serialVersionUID = 9125543150773844346L;
 
     private final String pluginName;
-    private volatile Set<MetricsGraph> graphs = new HashSet<>();
+    private final Map<String, MetricsGraph> graphs = new HashMap<>();
 
     MetricsInstance(final MetricsInstance instance) {
         this.pluginName = instance.pluginName;
-        for (final MetricsGraph mg : instance.graphs) {
-            this.graphs.add(new MetricsGraph(mg));
+        for (final String name : instance.graphs.keySet()) {
+            this.graphs.put(name, new MetricsGraph(instance.graphs.get(name)));
         }
     }
 
@@ -48,15 +48,11 @@ public final class MetricsInstance implements Serializable {
     public MetricsGraph getGraph(String name) {
         if (name != null && !name.trim().isEmpty()) {
             name = name.trim();
-            if (graphs.contains(name)) {
-                for (final MetricsGraph graph : graphs) {
-                    if (graph.equals(name)) {
-                        return new MetricsGraph(graph);
-                    }
-                }
+            if (graphs.containsKey(name)) {
+                return new MetricsGraph(graphs.get(name));
             } else {
                 final MetricsGraph graph = new MetricsGraph(name);
-                graphs.add(graph);
+                graphs.put(name, graph);
                 return graph;
             }
         }
@@ -64,15 +60,12 @@ public final class MetricsInstance implements Serializable {
     }
 
     public String[] getGraphNames() {
-        final Set<String> names = new HashSet<>();
-        for (final MetricsGraph graph : graphs) {
-            names.add(graph.getName());
-        }
-        return names.toArray(new String[names.size()]);
+        final int l = graphs.size();
+        return graphs.keySet().toArray(new String[l]);
     }
 
     public boolean removeGraph(final MetricsGraph graph) {
-        return graphs.remove(graph);
+        return graphs.remove(graph.getName()) != null;
     }
 
     @Override
@@ -96,7 +89,7 @@ public final class MetricsInstance implements Serializable {
     public boolean updateGraph(final MetricsGraph graph) {
         final boolean r = removeGraph(graph);
         if (r) {
-            graphs.add(new MetricsGraph(graph));
+            graphs.put(graph.getName(), new MetricsGraph(graph));
         }
         return r;
     }
@@ -108,10 +101,11 @@ public final class MetricsInstance implements Serializable {
     void putGraphs(final MetricsGraph[] graphs) {
         synchronized (this.graphs) {
             for (final MetricsGraph graph : graphs) {
-                if (this.graphs.contains(graph)) {
-                    this.graphs.remove(graph);
+                final String name = graph.getName();
+                if (this.graphs.containsKey(name)) {
+                    this.graphs.remove(name);
                 }
-                this.graphs.add(graph);
+                this.graphs.put(name, graph);
             }
         }
     }
