@@ -13,14 +13,14 @@ public enum OmcLibPermission {
 
     private static final String TOP_NODE_NAME = "omc-lib";
 
-    private static final Permission TOP_NODE = new Permission(TOP_NODE_NAME);
-
-    static {
-        Bukkit.getPluginManager().addPermission(TOP_NODE);
-    }
+    private static Permission topNode = null;
 
     public static Permission getTopNode() {
-        return TOP_NODE;
+        if (topNode == null){
+            topNode = new Permission(TOP_NODE_NAME);
+            Bukkit.getPluginManager().addPermission(topNode);
+        }
+        return topNode;
     }
 
     private final String name;
