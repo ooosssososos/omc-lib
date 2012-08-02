@@ -14,6 +14,7 @@ public final class OmcLibFeatureProperties extends FeatureProperties {
     private static final String PROPERTY_NAME_AUTO_SET_FEATURE_ACTIVE_STATE = "autoSetFeatureActiveState";
     private static final String PROPERTY_NAME_AUTO_ENABLE_IMPLEMENTED_FEATURES = "autoEnableImplementedFeatures";
     private static final String PROPERTY_NAME_BLACKLISTED_FEATURES = "blackListedFeatures";
+    private static final String PROPERTY_NAME_DEBUGGING = "debugging";
 
     private static final String ITEM_SEPARATOR = ";";
 
@@ -21,6 +22,7 @@ public final class OmcLibFeatureProperties extends FeatureProperties {
     private boolean autoSetFeatureActiveState = true;
     private final Set<String> autoEnableImplementedFeatures = new HashSet<>();
     private final Set<String> blacklistedFeatures = new HashSet<>();
+    private boolean debugging = true;
 
     OmcLibFeatureProperties(final OmcLibFeatureManager feature) {
         super(feature);
@@ -38,8 +40,61 @@ public final class OmcLibFeatureProperties extends FeatureProperties {
         return autoSetFeatureActiveState;
     }
 
+    public boolean isDebugging() {
+        return debugging;
+    }
+
     public boolean isFeatureBlacklisted(final Feature feature) {
         return blacklistedFeatures.contains(feature.getFeatureName());
+    }
+
+    public void setAutoEnable(final boolean autoEnable) {
+        if (this.autoEnable != autoEnable) {
+            this.autoEnable = autoEnable;
+            setDirty();
+        }
+    }
+
+    public void setAutoEnableImplementedFeature(final ImplementedFeature feature, final boolean autoEnableFeature) {
+        if (feature != null) {
+            final String n = feature.getInternalName();
+            if (autoEnableFeature && !autoEnableImplementedFeatures.contains(n)) {
+                autoEnableImplementedFeatures.add(n);
+                setDirty();
+            } else if (!autoEnableFeature && autoEnableImplementedFeatures.contains(n)) {
+                autoEnableImplementedFeatures.remove(n);
+                setDirty();
+            }
+        }
+    }
+
+    public void setAutoSetFeatureActiveState(final boolean autoSetFeatureActiveState) {
+        if (this.autoSetFeatureActiveState != autoSetFeatureActiveState) {
+            this.autoSetFeatureActiveState = autoSetFeatureActiveState;
+            setDirty();
+        }
+    }
+
+    public void setDebugging(final boolean debugging) {
+        if (this.debugging != debugging) {
+            this.debugging = debugging;
+            setDirty();
+        }
+    }
+
+    public void setFeatureBlacklisted(final Feature feature, final boolean blacklisted) {
+        final String n = feature.getFeatureName();
+        if (blacklisted) {
+            if (!blacklistedFeatures.contains(n)) {
+                blacklistedFeatures.add(n);
+                setDirty();
+            }
+        } else {
+            if (blacklistedFeatures.contains(n)) {
+                blacklistedFeatures.remove(n);
+                setDirty();
+            }
+        }
     }
 
     @Override
@@ -54,6 +109,7 @@ public final class OmcLibFeatureProperties extends FeatureProperties {
 
         autoEnable = Boolean.parseBoolean(p.getProperty(PROPERTY_NAME_AUTO_ENABLE));
         autoSetFeatureActiveState = Boolean.parseBoolean(p.getProperty(PROPERTY_NAME_AUTO_SET_FEATURE_ACTIVE_STATE));
+        debugging = Boolean.parseBoolean(p.getProperty(PROPERTY_NAME_DEBUGGING));
 
         { // auto-enable implemented feature
             final String[] prop = p.getProperty(PROPERTY_NAME_AUTO_ENABLE_IMPLEMENTED_FEATURES).split(ITEM_SEPARATOR);
@@ -80,6 +136,7 @@ public final class OmcLibFeatureProperties extends FeatureProperties {
 
         p.setProperty(PROPERTY_NAME_AUTO_ENABLE, String.valueOf(autoEnable));
         p.setProperty(PROPERTY_NAME_AUTO_SET_FEATURE_ACTIVE_STATE, String.valueOf(autoSetFeatureActiveState));
+        p.setProperty(PROPERTY_NAME_DEBUGGING, String.valueOf(debugging));
 
         { // auto-enable implemented feature
             final StringBuilder sb = new StringBuilder();
@@ -103,48 +160,6 @@ public final class OmcLibFeatureProperties extends FeatureProperties {
                 }
             }
             p.setProperty(PROPERTY_NAME_BLACKLISTED_FEATURES, sb.toString());
-        }
-    }
-
-    void setAutoEnable(final boolean autoEnable) {
-        if (this.autoEnable != autoEnable) {
-            this.autoEnable = autoEnable;
-            setDirty();
-        }
-    }
-
-    void setAutoEnableImplementedFeature(final ImplementedFeature feature, final boolean autoEnableFeature) {
-        if (feature != null) {
-            final String n = feature.getInternalName();
-            if (autoEnableFeature && !autoEnableImplementedFeatures.contains(n)) {
-                autoEnableImplementedFeatures.add(n);
-                setDirty();
-            } else if (!autoEnableFeature && autoEnableImplementedFeatures.contains(n)) {
-                autoEnableImplementedFeatures.remove(n);
-                setDirty();
-            }
-        }
-    }
-
-    void setAutoSetFeatureActiveState(final boolean autoSetFeatureActiveState) {
-        if (this.autoSetFeatureActiveState != autoSetFeatureActiveState) {
-            this.autoSetFeatureActiveState = autoSetFeatureActiveState;
-            setDirty();
-        }
-    }
-
-    void setFeatureBlacklisted(final Feature feature, final boolean blacklisted) {
-        final String n = feature.getFeatureName();
-        if (blacklisted) {
-            if (!blacklistedFeatures.contains(n)) {
-                blacklistedFeatures.add(n);
-                setDirty();
-            }
-        } else {
-            if (blacklistedFeatures.contains(n)) {
-                blacklistedFeatures.remove(n);
-                setDirty();
-            }
         }
     }
 
