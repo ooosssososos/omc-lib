@@ -33,7 +33,7 @@ public enum OmcLibPermission {
     }
 
     private OmcLibPermission(final String name, final PermissionDefault permissionDefault, final OmcLibPermission parent) {
-        final Permission perm = new Permission(name, permissionDefault);
+        final Permission perm = new Permission(getTopNode().getName() + name, permissionDefault);
         final Permission par = (parent == null) ? getTopNode() : parent.permission;
         perm.addParent(par, true);
         Bukkit.getPluginManager().addPermission(perm);
