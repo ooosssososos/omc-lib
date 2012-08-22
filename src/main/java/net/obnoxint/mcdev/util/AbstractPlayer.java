@@ -18,6 +18,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Server;
+import org.bukkit.Sound;
 import org.bukkit.Statistic;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -51,7 +52,7 @@ import org.bukkit.util.Vector;
  * Abstract implementation of the org.bukkit.entity.Player interface.
  * 
  * @author obnoxint
- * @since bukkit-1.2.5-R5.0
+ * @since bukkit-1.3.1-R2.1
  */
 public abstract class AbstractPlayer implements Player {
 
@@ -192,6 +193,11 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
+    public Inventory getEnderChest() {
+        return player.getEnderChest();
+    }
+
+    @Override
     public int getEntityId() {
         return getEntityId();
     }
@@ -239,6 +245,11 @@ public abstract class AbstractPlayer implements Player {
     @Override
     public long getFirstPlayed() {
         return player.getFirstPlayed();
+    }
+
+    @Override
+    public float getFlySpeed() {
+        return player.getFlySpeed();
     }
 
     @Override
@@ -449,6 +460,11 @@ public abstract class AbstractPlayer implements Player {
     @Override
     public Vector getVelocity() {
         return player.getVelocity();
+    }
+
+    @Override
+    public float getWalkSpeed() {
+        return player.getWalkSpeed();
     }
 
     @Override
@@ -677,6 +693,11 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
+    public void playSound(final Location location, final Sound sound, final float volume, final float pitch) {
+        player.playSound(location, sound, volume, pitch);
+    }
+
+    @Override
     public void recalculatePermissions() {
         player.recalculatePermissions();
     }
@@ -807,6 +828,11 @@ public abstract class AbstractPlayer implements Player {
     }
 
     @Override
+    public void setFlySpeed(final float value) throws IllegalArgumentException {
+        player.setFlySpeed(value);
+    }
+
+    @Override
     public void setFoodLevel(final int value) {
         player.setFoodLevel(value);
     }
@@ -924,6 +950,11 @@ public abstract class AbstractPlayer implements Player {
     @Override
     public void setVelocity(final Vector velocity) {
         player.setVelocity(velocity);
+    }
+
+    @Override
+    public void setWalkSpeed(final float value) throws IllegalArgumentException {
+        player.setWalkSpeed(value);
     }
 
     @Override
