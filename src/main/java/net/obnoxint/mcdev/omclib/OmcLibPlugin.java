@@ -35,6 +35,7 @@ public final class OmcLibPlugin extends JavaPlugin implements Versioned {
     private OmcLibFeatureManager featureManager;
     private PlayerPropertiesManager playerPropertiesManager;
     private OmcCommandExecutor commandExecutor;
+    private TickUtil tickUtil;
 
     private File dataFolder = null;
 
@@ -75,6 +76,10 @@ public final class OmcLibPlugin extends JavaPlugin implements Versioned {
         return playerPropertiesManager.getPlayerProperties(player);
     }
 
+    public TickUtil getTickUtil() {
+        return tickUtil;
+    }
+
     public UIDProvider getUidProvider() {
         return uidProvider;
     }
@@ -98,6 +103,7 @@ public final class OmcLibPlugin extends JavaPlugin implements Versioned {
         playerPropertiesManager = new PlayerPropertiesManager(this);
         featureManager = new OmcLibFeatureManager(this);
         commandExecutor = new OmcCommandExecutor();
+        tickUtil = new TickUtil();
         getCommand("omc").setExecutor(commandExecutor);
     }
 
