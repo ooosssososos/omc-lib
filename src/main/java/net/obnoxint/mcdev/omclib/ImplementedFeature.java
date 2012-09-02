@@ -4,12 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.obnoxint.mcdev.feature.Feature;
-import net.obnoxint.mcdev.omclib.compendium.OmcLibCompendiumFeature;
 import net.obnoxint.mcdev.omclib.metrics.OmcLibMetricsFeature;
 
 public enum ImplementedFeature {
 
-    COMPENDIUM("compendium", OmcLibCompendiumFeature.class),
     METRICS("metrics", OmcLibMetricsFeature.class);
 
     static final String FEATURE_PREFIX = "omc-lib_";
