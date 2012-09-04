@@ -82,12 +82,14 @@ public final class TickUtil {
     void unregisterServerTickTask() {
         if (serverTickTaskId != -1) {
             Bukkit.getScheduler().cancelTask(serverTickTaskId);
+            serverTickTask = null;
             serverTickTaskId = -1;
         }
     }
 
     private void registerServerTickTask() {
         if (serverTickTaskId == -1) {
+            serverTickTask = new ServerTickTask();
             serverTickTaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, serverTickTask, 0, 1);
         }
     }
