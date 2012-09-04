@@ -43,7 +43,6 @@ public final class UIDProvider {
             }
         }
         return r;
-
     }
 
     public boolean addUID(final Feature feature, final UUID uuid) {
@@ -122,7 +121,6 @@ public final class UIDProvider {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }

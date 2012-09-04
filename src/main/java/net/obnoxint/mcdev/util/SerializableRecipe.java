@@ -11,7 +11,6 @@ import org.bukkit.inventory.ShapelessRecipe;
 public abstract class SerializableRecipe implements Serializable {
 
     public static final int RECIPE_TYPE_FURNACE = 0;
-
     public static final int RECIPE_TYPE_SHAPED = 1;
     public static final int RECIPE_TYPE_SHAPELESS = 2;
 

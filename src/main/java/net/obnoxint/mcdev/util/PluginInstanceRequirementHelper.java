@@ -44,14 +44,11 @@ public final class PluginInstanceRequirementHelper implements Runnable {
     private static final long INTERVAL = 100L;
 
     private boolean acquired = false;
-
+    private boolean stopped = false;
     private Plugin plugin = null;
 
     private final String pluginName;
-
     private final PluginInstanceRequester requester;
-
-    private boolean stopped = false;
 
     /**
      * Creates a new PluginInstanceRequirementHelper.

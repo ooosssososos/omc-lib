@@ -16,22 +16,16 @@ public abstract class FeatureProperties {
     public static final String PROPERTIES_FILE_EXTENSION = ".properties";
 
     protected static final String PROPERTY_DEFAULT_BOOLEAN_FALSE = "false";
-
     protected static final String PROPERTY_DEFAULT_BOOLEAN_TRUE = "true";
-
     protected static final String PROPERTY_DEFAULT_NULL = "";
 
     private String comment = null;
-
     private boolean dirty = false;
+    private File propertiesDirectory = null;
+    private File propertiesFile = null;
 
     private final Feature feature;
-
     private final Properties properties = new Properties();
-
-    private File propertiesDirectory = null;
-
-    private File propertiesFile = null;
 
     public FeatureProperties(final Feature feature) {
         this.feature = feature;

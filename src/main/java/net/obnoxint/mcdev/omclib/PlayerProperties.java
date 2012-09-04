@@ -155,7 +155,6 @@ public final class PlayerProperties implements Serializable {
             settings.put(s, r);
         }
         return r;
-
     }
 
 }

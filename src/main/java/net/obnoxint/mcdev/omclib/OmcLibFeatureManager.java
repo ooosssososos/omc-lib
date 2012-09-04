@@ -31,7 +31,6 @@ public final class OmcLibFeatureManager extends FeatureManager {
             feature.setFeatureActive(active);
         }
         return r;
-
     }
 
     @Override
