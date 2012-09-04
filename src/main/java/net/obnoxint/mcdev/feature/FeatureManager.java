@@ -76,6 +76,6 @@ public abstract class FeatureManager implements Feature {
         if (this.name == null && name != null && !name.trim().isEmpty()) {
             this.name = name.trim();
         }
-        return name;
+        return this.name;
     }
 }
