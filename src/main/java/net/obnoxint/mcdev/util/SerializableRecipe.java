@@ -20,9 +20,9 @@ public abstract class SerializableRecipe implements Serializable {
             if (recipe instanceof FurnaceRecipe) {
                 r = new SerializableFurnaceRecipe((FurnaceRecipe) recipe);
             } else if (recipe instanceof ShapedRecipe) {
-                // TODO
+                r = new SerializableShapedRecipe((ShapedRecipe) recipe);
             } else if (recipe instanceof ShapelessRecipe) {
-                // TODO
+                r = new SerializableShapelessRecipe((ShapelessRecipe) recipe);
             }
         }
         return r;
