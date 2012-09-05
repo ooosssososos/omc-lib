@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class OmcLibPlugin extends JavaPlugin implements Versioned {
 
+    public static final String PLUGIN_NAME = "omc-lib";
     private static OmcLibPlugin instance = null;
 
     private static final String CLASSPATH = "plugins" + File.separator + "omc-lib.jar";
