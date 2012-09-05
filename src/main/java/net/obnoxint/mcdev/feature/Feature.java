@@ -2,6 +2,11 @@ package net.obnoxint.mcdev.feature;
 
 import org.bukkit.plugin.Plugin;
 
+/**
+ * <p>
+ * A logical unit possibly managed by a {@link FeatureManager}. Please read the README file for more information about how Features are supposed to be used.
+ * </p>
+ */
 public interface Feature {
 
     /**

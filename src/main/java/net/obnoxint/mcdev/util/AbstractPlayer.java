@@ -49,9 +49,14 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 /**
+ * <p>
  * Abstract implementation of the org.bukkit.entity.Player interface.
+ * </p>
+ * <p>
+ * This class stores the name of a player and uses it to maintain a reference to the according Player object.<br>
+ * Since this reference can become obsolete when a player disconnects from the server, the {@link #update()} method must be called in order to reacquire a valid reference.
+ * </p>
  * 
- * @author obnoxint
  * @since bukkit-1.3.1-R2.1
  */
 public abstract class AbstractPlayer implements Player {
@@ -59,6 +64,11 @@ public abstract class AbstractPlayer implements Player {
     private final String playerName;
     private Player player;
 
+    /**
+     * Creates a new instance and calls the {@link #update()} method. Therefore the passed reference and the reference maintained by this instance may not be the same.
+     * 
+     * @param player the player. An IllegalArgumentException will be thrown if <i>player</i> is null.
+     */
     public AbstractPlayer(final Player player) {
         if (player == null) {
             throw new IllegalArgumentException();
@@ -1011,7 +1021,9 @@ public abstract class AbstractPlayer implements Player {
     }
 
     /**
-     * @throws IllegalStateException
+     * Updates the reference to the Player object.
+     * 
+     * @throws IllegalStateException if the reference could not be acquired.
      */
     public final void update() throws IllegalStateException {
         final Player p = Bukkit.getPlayerExact(playerName);

@@ -37,9 +37,13 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 /**
+ * <p>
  * Abstract implementation of the org.bukkit.World interface.
+ * </p>
+ * <p>
+ * This class stores the name of a world and uses it to maintain a reference to the according World object.<br>
+ * </p>
  * 
- * @author obnoxint
  * @since bukkit-1.3.1-R2.1
  */
 @SuppressWarnings("deprecation")
@@ -48,6 +52,11 @@ public abstract class AbstractWorld implements World {
     private final String worldName;
     private World world;
 
+    /**
+     * Creates a new instance and calls the {@link #update()} method. Therefore the passed reference and the reference maintained by this instance may not be the same.
+     * 
+     * @param world the world. An IllegalArgumentException will be thrown if <i>world</i> is null.
+     */
     public AbstractWorld(final World world) {
         if (world == null) {
             throw new IllegalArgumentException();
@@ -628,7 +637,9 @@ public abstract class AbstractWorld implements World {
     }
 
     /**
-     * @throws IllegalStateException
+     * Updates the reference to the world object.
+     * 
+     * @throws IllegalStateException if the reference could not be acquired.
      */
     public final void update() throws IllegalStateException {
         final World w = Bukkit.getWorld(worldName);

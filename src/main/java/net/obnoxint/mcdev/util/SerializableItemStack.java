@@ -10,10 +10,21 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
+/**
+ * <p>
+ * A serializable and immutable wrapper for org.bukkit.inventory.ItemStack objects.
+ * </p>
+ */
 public class SerializableItemStack implements Serializable {
 
     private static final long serialVersionUID = 6251309292346486453L;
 
+    /**
+     * Creates a new instance based on the given string. The general contract of this method is that if the output of the {@link #toString()} is passed it will result in a clone.
+     * 
+     * @param string the string.
+     * @return a new instance or null if string could not be parsed.
+     */
     public static SerializableItemStack fromString(final String string) {
         SerializableItemStack r = null;
         final String[] s = string.split(",");
@@ -56,6 +67,11 @@ public class SerializableItemStack implements Serializable {
 
     private final Map<Integer, Integer> enchantments;
 
+    /**
+     * Creates a new instance based on the given ItemStack.
+     * 
+     * @param itemStack the ItemStack.
+     */
     public SerializableItemStack(final ItemStack itemStack) {
         this(itemStack.getTypeId(),
                 itemStack.getAmount(),
@@ -72,6 +88,20 @@ public class SerializableItemStack implements Serializable {
         this.enchantments = enchantments;
     }
 
+    /**
+     * <p>
+     * The following types can be used to compare the instance with the passed value:
+     * </p>
+     * <ul>
+     * <li><b>SerializableItemstack:</b> All values (including enchantments) will be compared.</li>
+     * <li><b>Material:</b> Only the material id will be compared.</li>
+     * <li><b>Itemstack:</b> All values (including enchantments) will be compared by internally creating a new instance of SerializableItemStack based on the given ItemStack.</li>
+     * <li><b>String:</b> All values (including enchantments) will be compared by internally creating a new instance of SerializableItemStack. The internally used instance will be
+     * created through the {@link #fromString(String)} method.</li>
+     * </ul>
+     * 
+     * @return true if the passed value is equal to this instance.
+     */
     @Override
     public boolean equals(final Object obj) {
         if (obj != null) {
@@ -90,14 +120,23 @@ public class SerializableItemStack implements Serializable {
         return false;
     }
 
+    /**
+     * @return the amount.
+     */
     public int getAmount() {
         return amount;
     }
 
+    /**
+     * @return the durability.
+     */
     public short getDurability() {
         return durability;
     }
 
+    /**
+     * @return a Map containing all enchantments (key) as well as their level (value).
+     */
     public Map<Enchantment, Integer> getEnchantments() {
         final Map<Enchantment, Integer> r = new HashMap<>();
         for (final int i : enchantments.keySet()) {
@@ -106,18 +145,32 @@ public class SerializableItemStack implements Serializable {
         return Collections.unmodifiableMap(r);
     }
 
+    /**
+     * @return the Material.
+     */
     public Material getMaterial() {
         return Material.getMaterial(type);
     }
 
+    /**
+     * @return the MaterialData.
+     */
     public MaterialData getMaterialData() {
         return new MaterialData(type, data);
     }
 
+    /**
+     * @return the type.
+     */
     public int getType() {
         return type;
     }
 
+    /**
+     * Creates a new ItemStack based on this instance. If this instance contains enchantments they will be added in an unsafe way.
+     * 
+     * @return the ItemStack.
+     */
     public ItemStack toItemStack() {
         final ItemStack r = new ItemStack(getMaterial(), amount, durability, data);
         final Map<Enchantment, Integer> m = getEnchantments();
@@ -127,6 +180,17 @@ public class SerializableItemStack implements Serializable {
         return r;
     }
 
+    /**
+     * <p>
+     * Creates a String representing this instance in the following format:
+     * <p>
+     * <ul>
+     * <li><b>Without enchantments:</b> [type],[amount],[durability],[data]</li>
+     * <li><b>With enchantments:</b> [type],[amount],[durability],[data],{[enchantment1]=[level];[enchantment2]=[level]}</li>
+     * </ul>
+     * 
+     * @return a String representing this instance.
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder()

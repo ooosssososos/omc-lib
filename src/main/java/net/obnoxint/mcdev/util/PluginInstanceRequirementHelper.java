@@ -16,8 +16,6 @@ import org.bukkit.plugin.java.JavaPluginLoader;
  * <p>
  * As soon as the reference was acquired the getPlugin() method will return the Plugin-instance. Before that it will always return null.
  * </p>
- * 
- * @author obnoxint
  */
 public final class PluginInstanceRequirementHelper implements Runnable {
 

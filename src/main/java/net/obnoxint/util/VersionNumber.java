@@ -2,8 +2,18 @@ package net.obnoxint.util;
 
 import java.io.Serializable;
 
+/**
+ * <p>
+ * Instances of this class represent a version number in the format of [Mayor version].[Minor version].[Revision].[Build].<br>
+ * A markup (e.g -RC1) can be attached and will be ignored by the {@link #compareTo(VersionNumber)} method but not by the {@link #equals(Object)} method.
+ * </p>
+ * A textual representation (or return value of the toString() method) of this class could look like this: <i>1.0.10.500-RC1</i>
+ */
 public class VersionNumber implements Comparable<VersionNumber>, Serializable {
 
+    /**
+     * This is interface can be used in order to signalize that a class is utilizing a single static instance of the VersionNumber class.
+     */
     public static interface Versioned {
 
         /**
@@ -29,6 +39,21 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
 
     private static final long serialVersionUID = 9142373700216765155L;
 
+    /**
+     * <p>
+     * Creates an instance of VersionNumber based on a String.
+     * </p>
+     * <p>
+     * The general contract of this method is<br>
+     * <code>
+     * VersionNumber vn = new VersionNumber(0, 0, 1, 0, null);<br>
+     * boolean b = vn.equals(vn.fromString(vn.toString()));<br>
+     * </code> where b is <i>true</i>.
+     * <p>
+     * 
+     * @param string the String representing a version number.
+     * @return the VersionNumber or null if an instance of VersionNumber can not be build from the given String.
+     */
     public static VersionNumber fromString(final String string) {
         if (string != null) {
             int maj, min, rev, bld;
@@ -178,6 +203,20 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
     private final int build;
     private final String markup;
 
+    /**
+     * <p>
+     * Creates a new instance of VersionNumber.
+     * </p>
+     * <p>
+     * Negative numbers are not allowed. If a negative number is given, it will be replaced by 0.
+     * </p>
+     * 
+     * @param major the major version.
+     * @param minor the minor version.
+     * @param revision the revision.
+     * @param build the build number.
+     * @param markup an optional markup or null.
+     */
     public VersionNumber(final int major, final int minor, final int revision, final int build, final String markup) {
         this.major = (major < 0) ? 0 : major;
         this.minor = (minor < 0) ? 0 : minor;
@@ -186,6 +225,11 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
         this.markup = (markup == null || markup.trim().isEmpty()) ? "" : markup.trim();
     }
 
+    /**
+     * Creates a clone of an instance of VersionNumber.
+     * 
+     * @param v the VersionNumber.
+     */
     public VersionNumber(final VersionNumber v) {
         this(v.major, v.minor, v.revision, v.build, v.markup);
     }
@@ -242,22 +286,37 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
         return false;
     }
 
+    /**
+     * @return the build number.
+     */
     public final int getBuild() {
         return build;
     }
 
+    /**
+     * @return the major version.
+     */
     public final int getMajor() {
         return major;
     }
 
+    /**
+     * @return the markup or an empty String if no markup has been defined.
+     */
     public final String getMarkup() {
         return markup;
     }
 
+    /**
+     * @return the minor version.
+     */
     public final int getMinor() {
         return minor;
     }
 
+    /**
+     * @return the revision.
+     */
     public final int getRevision() {
         return revision;
     }
