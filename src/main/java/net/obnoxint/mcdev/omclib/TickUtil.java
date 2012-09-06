@@ -79,7 +79,7 @@ public final class TickUtil {
             if (tick == 0) { // assume perfect tick rate on second tick
                 tpsHistory.add(100f);
             } else {
-                tpsHistory.add((float) (5000 / (System.currentTimeMillis() - lastTick)));
+                tpsHistory.add((float) (5000 / (float)(System.currentTimeMillis() - lastTick)));
             }
             if (tpsHistory.size() > TPSHISTORY_QUEUE_SIZE) { // cut the queue if it gets too big
                 tpsHistory.poll();
