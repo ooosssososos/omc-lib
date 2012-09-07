@@ -8,6 +8,7 @@ public enum OmcLibPermission {
 
     COMMAND(".command", PermissionDefault.OP),
     COMMAND_DEBUG(".command.debug", PermissionDefault.OP, COMMAND),
+    COMMAND_FEATURE(".command.feature", PermissionDefault.OP, COMMAND),
     COMPENDIUM(".compendium", PermissionDefault.OP),
     COMPENDIUM_READ_TOPIC(".compendium.topic", PermissionDefault.OP, COMPENDIUM);
 

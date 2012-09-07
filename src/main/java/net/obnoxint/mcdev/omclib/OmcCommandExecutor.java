@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.obnoxint.mcdev.omclib.command.DebugCommandHandler;
+import net.obnoxint.mcdev.omclib.command.FeatureCommandHandler;
 import net.obnoxint.mcdev.omclib.command.OmcCommandHandler;
 
 import org.bukkit.command.Command;
@@ -14,7 +15,8 @@ import org.bukkit.permissions.Permission;
 final class OmcCommandExecutor implements CommandExecutor {
 
     private enum DefaultHandler {
-        DEBUG(DebugCommandHandler.class);
+        DEBUG(DebugCommandHandler.class),
+        FEATURE(FeatureCommandHandler.class);
 
         private final Class<? extends OmcCommandHandler> clazz;
 
