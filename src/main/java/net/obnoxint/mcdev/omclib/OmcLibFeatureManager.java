@@ -38,6 +38,10 @@ public final class OmcLibFeatureManager extends FeatureManager {
         return super.getFeature(name);
     }
 
+    public String[] getFeatureNames() {
+        return super.getFeatures().keySet().toArray(new String[super.getFeatures().size()]);
+    }
+
     @Override
     public OmcLibPlugin getFeaturePlugin() {
         return (OmcLibPlugin) super.getFeaturePlugin();
