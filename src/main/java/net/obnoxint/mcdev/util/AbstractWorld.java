@@ -100,6 +100,21 @@ public abstract class AbstractWorld implements World {
         return world.dropItemNaturally(location, item);
     }
 
+    /**
+     * @return true if the given object (String or World) is equal to this instance.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj != null) {
+            if (obj instanceof World) {
+                return worldName.equals(((World) obj).getName());
+            } else if (obj instanceof String) {
+                return worldName.equals(obj);
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean generateTree(final Location location, final TreeType type) {
         return world.generateTree(location, type);

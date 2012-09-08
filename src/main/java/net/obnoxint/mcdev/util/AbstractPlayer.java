@@ -167,6 +167,21 @@ public abstract class AbstractPlayer implements Player {
         return player.eject();
     }
 
+    /**
+     * @return true if the given object (String or Player) is equal to this instance.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj != null) {
+            if (obj instanceof Player) {
+                return playerName.equals(((Player) obj).getName());
+            } else if (obj instanceof String) {
+                return playerName.equals((obj));
+            }
+        }
+        return false;
+    }
+
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
         return player.getActivePotionEffects();
