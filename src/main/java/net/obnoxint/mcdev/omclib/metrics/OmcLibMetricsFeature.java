@@ -79,14 +79,14 @@ public final class OmcLibMetricsFeature implements Feature {
     public void setFeatureActive(final boolean active) {
         if (this.active != active) {
             if (active) {
-                properties.loadProperties();
+                properties.load();
                 taskId = Bukkit.getScheduler().scheduleAsyncRepeatingTask(getFeaturePlugin(), adapter, TASK_DELAY, TASK_PERIOD);
             } else {
                 Bukkit.getScheduler().cancelTask(taskId);
                 try {
                     adapter.report(true);
                 } catch (final Exception e) {}
-                properties.storeProperties();
+                properties.store();
                 storeAllInstanceFiles();
             }
             this.active = active;

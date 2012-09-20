@@ -51,11 +51,11 @@ public final class FeatureCommandHandler extends OmcCommandHandler {
                         if (f.getFeatureProperties().isDirty()) {
                             sender.sendMessage("Warning: changes in memory will be overwritten.");
                         }
-                        f.getFeatureProperties().loadProperties();
+                        f.getFeatureProperties().load();
                         sender.sendMessage("Properties loaded from properties file.");
                     break;
                     case "storeproperties":
-                        f.getFeatureProperties().storeProperties();
+                        f.getFeatureProperties().store();
                         sender.sendMessage("Properties stored to properties file.");
                     break;
                     default:

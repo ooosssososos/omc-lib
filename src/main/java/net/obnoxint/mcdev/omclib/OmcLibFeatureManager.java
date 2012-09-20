@@ -13,7 +13,7 @@ public final class OmcLibFeatureManager extends FeatureManager {
         super(plugin);
         setFeatureName("omc-lib");
         properties = new OmcLibFeatureProperties(this);
-        properties.loadProperties();
+        properties.load();
         if (properties.isAutoEnable()) {
             setFeatureActive(true);
         }
@@ -70,9 +70,9 @@ public final class OmcLibFeatureManager extends FeatureManager {
         if (this.active != active) {
             super.setFeatureActive(active);
             if (active) {
-                properties.loadProperties();
+                properties.load();
             } else {
-                properties.storeProperties();
+                properties.store();
             }
             this.active = active;
         }
