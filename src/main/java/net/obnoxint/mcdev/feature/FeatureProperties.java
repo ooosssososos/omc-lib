@@ -42,34 +42,12 @@ public abstract class FeatureProperties {
         return dirty;
     }
 
-    public final void loadProperties() {
-        try {
-            onLoad();
-            final FileInputStream fis = new FileInputStream(getPropertiesFile());
-            getProperties().load(fis);
-            fis.close();
-            onLoaded();
-            Bukkit.getPluginManager().callEvent(new FeaturePropertiesLoadedEvent(feature));
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
+    public boolean load() {
+        return loadProperties();
     }
 
-    public final void storeProperties() {
-        if (isDirty()) {
-            try {
-                onStore();
-                final FileOutputStream fos = new FileOutputStream(getPropertiesFile());
-                getProperties().store(fos, getComment());
-                fos.flush();
-                fos.close();
-                setDirty(false);
-                onStored();
-                Bukkit.getPluginManager().callEvent(new FeaturePropertiesStoredEvent(feature));
-            } catch (final IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public boolean store() {
+        return storeProperties();
     }
 
     protected Feature getFeature() {
@@ -149,11 +127,47 @@ public abstract class FeatureProperties {
         }
     }
 
+    private final boolean loadProperties() {
+        boolean r = false;
+        try {
+            onLoad();
+            final FileInputStream fis = new FileInputStream(getPropertiesFile());
+            getProperties().load(fis);
+            fis.close();
+            onLoaded();
+            Bukkit.getPluginManager().callEvent(new FeaturePropertiesLoadedEvent(feature));
+            r = true;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+
     /**
      * @param dirty set this to true if there are changes to be make or to false, when the properties were successfully synchronized with the properties file.
      */
     private void setDirty(final boolean dirty) {
         this.dirty = dirty;
+    }
+
+    private final boolean storeProperties() {
+        boolean r = false;
+        if (isDirty()) {
+            try {
+                onStore();
+                final FileOutputStream fos = new FileOutputStream(getPropertiesFile());
+                getProperties().store(fos, getComment());
+                fos.flush();
+                fos.close();
+                setDirty(false);
+                onStored();
+                Bukkit.getPluginManager().callEvent(new FeaturePropertiesStoredEvent(feature));
+                r = true;
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return r;
     }
 
 }
