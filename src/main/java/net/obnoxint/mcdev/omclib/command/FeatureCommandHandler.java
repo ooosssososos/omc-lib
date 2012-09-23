@@ -47,16 +47,16 @@ public final class FeatureCommandHandler extends OmcCommandHandler {
                             sender.sendMessage("Feature is already inactive.");
                         }
                     break;
-                    case "loadproperties":
+                    case "load":
                         if (f.getFeatureProperties().isDirty()) {
                             sender.sendMessage("Warning: changes in memory will be overwritten.");
                         }
                         f.getFeatureProperties().load();
-                        sender.sendMessage("Properties loaded from properties file.");
+                        sender.sendMessage("Properties loaded from file.");
                     break;
-                    case "storeproperties":
+                    case "store":
                         f.getFeatureProperties().store();
-                        sender.sendMessage("Properties stored to properties file.");
+                        sender.sendMessage("Properties stored to file.");
                     break;
                     default:
                         return false;
