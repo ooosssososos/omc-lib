@@ -224,7 +224,7 @@ public abstract class AbstractPlayer implements Player {
 
     @Override
     public int getEntityId() {
-        return getEntityId();
+        return player.getEntityId();
     }
 
     @Override
