@@ -85,7 +85,9 @@ public final class OmcLibMetricsFeature implements Feature {
                 Bukkit.getScheduler().cancelTask(taskId);
                 try {
                     adapter.report(true);
-                } catch (final Exception e) {}
+                } catch (final Exception e) {
+                    OmcLibPlugin.getInstance().getLogger().warning(getFeatureName() + ": An exception was thrown while sending a report: " + e.getMessage());
+                }
                 properties.store();
                 storeAllInstanceFiles();
             }
