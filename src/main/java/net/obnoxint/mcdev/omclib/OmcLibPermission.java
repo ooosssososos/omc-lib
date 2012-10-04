@@ -16,7 +16,7 @@ public enum OmcLibPermission {
 
     private static Permission topNode = null;
 
-    public static Permission getTopNode() {
+    private static Permission getTopNode() {
         if (topNode == null){
             topNode = new Permission(TOP_NODE_NAME);
             Bukkit.getPluginManager().addPermission(topNode);
