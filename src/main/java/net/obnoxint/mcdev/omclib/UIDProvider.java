@@ -94,7 +94,7 @@ public final class UIDProvider {
     @SuppressWarnings("unchecked")
     private void init() {
         ObjectInputStream ois = null;
-        Map<String, Map<String, UUID>> m = null;
+        Map<String, Map<String, UUID>> m = new HashMap<>();
         try {
             if (!uidFile.exists()) {
                 uidFile.createNewFile();
