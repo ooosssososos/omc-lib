@@ -322,6 +322,18 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + build;
+        result = prime * result + major;
+        result = prime * result + ((markup == null) ? 0 : markup.hashCode());
+        result = prime * result + minor;
+        result = prime * result + revision;
+        return result;
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder().append(major).append(VERSION_SEGMENT_SEPARATOR).append(minor).append(VERSION_SEGMENT_SEPARATOR).append(revision).append(VERSION_SEGMENT_SEPARATOR).append(build);
         if (!markup.isEmpty()) {

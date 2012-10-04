@@ -153,6 +153,15 @@ public class SerializableNote implements Serializable {
         return new Note(note);
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + instrument;
+        result = prime * result + note;
+        return result;
+    }
+
     /**
      * Plays this SerializableNote to the given player at the players location current location.
      * 

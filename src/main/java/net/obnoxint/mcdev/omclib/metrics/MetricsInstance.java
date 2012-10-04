@@ -64,6 +64,15 @@ public final class MetricsInstance implements Serializable {
         return graphs.keySet().toArray(new String[l]);
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((graphs == null) ? 0 : graphs.hashCode());
+        result = prime * result + ((pluginName == null) ? 0 : pluginName.hashCode());
+        return result;
+    }
+
     public boolean removeGraph(final MetricsGraph graph) {
         return graphs.remove(graph.getName()) != null;
     }

@@ -166,6 +166,18 @@ public class SerializableItemStack implements Serializable {
         return type;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + amount;
+        result = prime * result + data;
+        result = prime * result + durability;
+        result = prime * result + ((enchantments == null) ? 0 : enchantments.hashCode());
+        result = prime * result + type;
+        return result;
+    }
+
     /**
      * Creates a new ItemStack based on this instance. If this instance contains enchantments they will be added in an unsafe way.
      * 

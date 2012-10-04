@@ -72,6 +72,15 @@ public final class MetricsGraph implements Serializable {
         return plotters.keySet().toArray(new String[l]);
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((plotters == null) ? 0 : plotters.hashCode());
+        return result;
+    }
+
     public boolean removePlotter(final MetricsPlotter plotter) {
         return plotters.remove(plotter.getId()) != null;
     }
