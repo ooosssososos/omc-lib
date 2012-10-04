@@ -60,7 +60,7 @@ public class VersionNumber implements Comparable<VersionNumber>, Serializable {
             String mu = "";
             String[] split1, split2;
 
-            split1 = string.split(VERSION_SEGMENT_SEPARATOR);
+            split1 = string.split("\\" + VERSION_SEGMENT_SEPARATOR);
             if (split1.length == 4) {
                 split2 = split1[3].split(MARKUP_SEGMENT_SEPARATOR);
                 try {
