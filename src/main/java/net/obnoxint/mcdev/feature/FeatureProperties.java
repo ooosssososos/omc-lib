@@ -74,8 +74,8 @@ public abstract class FeatureProperties {
             if (!f.exists()) {
                 try {
                     f.createNewFile();
-                    onFileCreated();
                     setDirty();
+                    onFileCreated();
                 } catch (final IOException e) {
                     e.printStackTrace();
                     getFeature().setFeatureActive(false);
