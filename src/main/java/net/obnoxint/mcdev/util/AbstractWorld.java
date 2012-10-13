@@ -374,6 +374,10 @@ public abstract class AbstractWorld implements World {
         return world.getWorldFolder();
     }
 
+    public String getWorldName() {
+        return worldName;
+    }
+
     @Override
     public WorldType getWorldType() {
         return world.getWorldType();
